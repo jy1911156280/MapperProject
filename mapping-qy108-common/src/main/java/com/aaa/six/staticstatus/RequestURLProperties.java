@@ -13,6 +13,6 @@ public class RequestURLProperties {
     /**
      * 基础controller包路径
      */
-    public static final String PACKAGE_CONTROLLER_URL = "com.aaa.lee.controller";
+    public static final String PACKAGE_CONTROLLER_URL = "com.aaa.six.controller";
 
 }

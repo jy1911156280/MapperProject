@@ -2,10 +2,12 @@ package com.aaa.six.staticstatus;
 
 /**
  * @Company AAA软件教育
- * @Author Seven Lee
- * @Date Create in 2020/5/15 17:09
+ * @Title mapping-qy108
+ * @Author hhy
+ * @Version 0.1.0
+ * @Date Create in 2020/5/16 8:32
  * @Description
- **/
+ */
 public class RedisProperties {
 
     public static final String NX = "nx";

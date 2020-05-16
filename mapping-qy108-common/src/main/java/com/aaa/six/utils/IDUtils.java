@@ -4,10 +4,12 @@ import java.util.UUID;
 
 /**
  * @Company AAA软件教育
- * @Author Seven Lee
- * @Date Create in 2020/5/15 16:33
+ * @Title mapping-qy108
+ * @Author hhy
+ * @Version 0.1.0
+ * @Date Create in 2020/5/13 13:05
  * @Description
- **/
+ */
 public class IDUtils {
 
     private IDUtils() {
@@ -15,14 +17,14 @@ public class IDUtils {
     }
 
     /**
-     * @author Seven Lee
+     * @author hhy
      * @description
-     *      获取uuid
-     * @param [id]
-     * @date 2020/5/15
+     *    获取uuid
+     * @param: []
+     * @date 2020/5/16 20:42
      * @return java.lang.String
-     * @throws
-    **/
+     * @throws 
+     */
     public static String getUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
