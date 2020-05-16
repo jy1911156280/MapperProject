@@ -2,6 +2,7 @@ package com.aaa.six.controller;
 
 import com.aaa.six.base.BaseService;
 import com.aaa.six.base.CommonController;
+import com.aaa.six.model.User;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
