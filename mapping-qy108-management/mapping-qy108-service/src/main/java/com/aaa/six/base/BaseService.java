@@ -12,9 +12,8 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -39,6 +38,8 @@ public abstract class BaseService<T> {
     @Autowired
     private Mapper<T> mapper;
 
+
+
     /**
      * @author hhy
      * @description
@@ -51,6 +52,21 @@ public abstract class BaseService<T> {
     protected Mapper getMapper(){
       return mapper;
     }
+
+    /**
+     *@Description: TODO
+     * 获取当前时间  用于创建 和更改数据的记录
+     *@Param :  []
+     *@MethodName: getCurrentTime
+     *@Author: lifuju
+     *@Date: 2020/5/22 10:39
+     *@Return: java.lang.String
+     */
+    protected String getCurrentTime(){
+        return  new SimpleDateFormat("yyyy-MM-dd:hh:mm:ss").format(new Date());
+    }
+
+
 
     /**
      * @author hhy
@@ -76,6 +92,10 @@ public abstract class BaseService<T> {
      */
     public Integer delete(T t) throws Exception{
         return mapper.deleteByPrimaryKey(t);
+    }
+
+    public Integer delete(Long id) throws Exception{
+        return mapper.deleteByPrimaryKey(id);
     }
 
     /**
@@ -141,6 +161,19 @@ public abstract class BaseService<T> {
     }
 
     /**
+     *@Description: TODO
+     * 查询一条
+     *@Param :  [id]
+     *@MethodName: queryOne
+     *@Author: lifuju
+     *@Date: 2020/5/23 9:43
+     *@Return: T
+     */
+    public T queryOne(Integer id) throws Exception{
+        return mapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * @author hhy
      * @description
      *    封装条件查询，分页查询以及排序查询的通用方法(多条件查询)
@@ -195,6 +228,38 @@ public abstract class BaseService<T> {
     /**
      * @author hhy
      * @description
+     *    分页查询
+     * @param: [t, pageNo, pageSize]
+     * @date 2020/5/13 10:13
+     * @return com.github.pagehelper.PageInfo<T>
+     * @throws
+     */
+    public PageInfo<T> queryListByPage(T t, Integer pageNo, Integer pageSize) throws Exception {
+        PageHelper.startPage(pageNo, pageSize);
+        List<T> select = mapper.select(t);
+        PageInfo<T> pageInfo = new PageInfo<T>(select);
+        return pageInfo;
+    }
+
+   /**
+    *@Description: TODO
+    * 分页查询
+    *@Param :  [pageNo, pageSize]
+    *@MethodName: queryListByPage
+    *@Author: lifuju
+    *@Date: 2020/5/22 15:08
+    *@Return: com.github.pagehelper.PageInfo<T>
+    */
+   public PageInfo<T> queryListByPage(Integer pageNo, Integer pageSize) throws Exception {
+        PageHelper.startPage(pageNo, pageSize);
+        List<T> select = mapper.selectAll();
+        PageInfo<T> pageInfo = new PageInfo<T>(select);
+        return pageInfo;
+    }
+
+    /**
+     * @author hhy
+     * @description
      *    通过反射获取实例对象
      * @param: [map]
      * @date 2020/5/13 10:26
@@ -217,21 +282,7 @@ public abstract class BaseService<T> {
     public List newInstance(List<Map> list) {
         return (List) Map2BeanUtils.map2Bean(list, getTypeArguement());
     }
-    /**
-     * @author hhy
-     * @description
-     *    分页查询
-     * @param: [t, pageNo, pageSize]
-     * @date 2020/5/13 10:13
-     * @return com.github.pagehelper.PageInfo<T>
-     * @throws 
-     */
-    public PageInfo<T> queryListByPage(T t, Integer pageNo, Integer pageSize) throws Exception {
-        PageHelper.startPage(pageNo, pageSize);
-        List<T> select = mapper.select(t);
-        PageInfo<T> pageInfo = new PageInfo<T>(select);
-        return pageInfo;
-    }
+
 
 
     /**

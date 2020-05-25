@@ -1,5 +1,6 @@
 package com.aaa.six.utils;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -28,5 +29,22 @@ public class IDUtils {
     public static String getUUID() {
         return UUID.randomUUID().toString().replace("-", "");
     }
+
+   /**
+    *@Description: TODO
+    * 生成唯一主键 Long
+    *   格式：时间+随机数
+    *@Param :  []
+    *@MethodName: genUniqueKey
+    *@Author: lifuju
+    *@Date: 2020/5/22 17:42
+    *@Return: java.lang.Long
+    */
+   public static synchronized Long genUniqueKey() {
+        Random random = new Random();
+        Integer number = random.nextInt(900000) + 100000;
+        return System.currentTimeMillis() + number;
+    }
+
 
 }
