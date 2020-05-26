@@ -1,6 +1,6 @@
 package com.aaa.six;
 
-import com.aaa.six.base.ResultData;
+import com.aaa.six.model.Dept;
 import com.aaa.six.model.MappingProject;
 import com.aaa.six.model.User;
 import com.aaa.six.vo.TokenVo;
@@ -9,7 +9,6 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Company AAA软件教育
@@ -48,6 +47,87 @@ public interface IQYService {
     TokenVo doLogin(@RequestBody User user);
 
     /**
+     * @Author: ly
+     * @description:
+     *
+     *      查询所有的部门
+     * @date: 2020/5/22
+     * @param pid
+     * @param pageNo
+     * @param pageSize
+     * @return: com.github.pagehelper.PageInfo
+     *
+     */
+    @PostMapping("/getAllDept")
+    PageInfo getAllDept(@RequestParam("pid") Integer pid, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      根据主键查找部门
+     * @date: 2020/5/22
+     * @param id
+     * @return: com.aaa.six.model.Dept
+     *
+     */
+    @GetMapping("/getDeptById")
+    Dept getDeptById(@RequestParam("id")Integer id);
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      按照调价查询部门
+     * @date: 2020/5/22
+     * @param dept
+     * @return: java.util.List<com.aaa.six.model.Dept>
+     *
+     */
+    @PostMapping("/getDeptByFileds")
+    List<Dept> getDeptByFileds(@RequestBody Dept dept);
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      更新部门
+     * @date: 2020/5/22
+     * @param dept
+     * @return: java.lang.Integer
+     *
+     */
+    @PostMapping("/updateDept")
+    Integer updateDept(@RequestBody Dept dept);
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      按照主键批量删除
+     * @date: 2020/5/22
+     * @param ids
+     * @return: java.lang.Integer
+     *
+     */
+    @PostMapping("/delByIds")
+    Integer delByIds(@RequestBody List<Object> ids);
+
+    /**
+     * @Author: ly
+     * @description:
+     *
+     *      增加部门
+     * @date: 2020/5/22
+     * @param dept
+     * @return: java.lang.Integer
+     *
+     */
+    @PostMapping("/addDept")
+    Integer addDept(@RequestBody Dept dept);
+
+
+    /**
      *@Description: TODO
      * 项目管理 新增方法 单个新增
      *@Param :  [mappingProject]
@@ -68,7 +148,7 @@ public interface IQYService {
      *@Return: java.lang.Integer
      */
     @GetMapping("/delMappingProject/{id}")
-    Integer delMappingProject(@PathVariable("id")Long id);
+    Integer delMappingProject(@PathVariable("id") Long id);
 
     /**
      *@Description: TODO
@@ -80,7 +160,7 @@ public interface IQYService {
      *@Return: java.lang.Integer
      */
     @PostMapping("/deleteBatchMappingProject")
-   Integer delBatch(@RequestBody List<Object> ids);
+    Integer delBatch(@RequestBody List<Object> ids);
 
     /**
      *@Description: TODO
@@ -91,7 +171,7 @@ public interface IQYService {
      *@Date: 2020/5/24 8:52
      *@Return: com.aaa.six.model.MappingProject
      */
-    @GetMapping("/selectOne")
+    @GetMapping("lectOne")
     MappingProject selectOne(@RequestParam("id")Long id);
 
     /**
@@ -117,7 +197,4 @@ public interface IQYService {
      */
     @PostMapping("/mappingProjectByPage")
     PageInfo queryListByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
-
-
-
 }
