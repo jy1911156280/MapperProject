@@ -1,6 +1,7 @@
 package com.aaa.six.controller;
 
 import com.aaa.six.IQYService;
+import com.aaa.six.annotation.LoginLogAnnotation;
 import com.aaa.six.base.BaseController;
 import com.aaa.six.base.ResultData;
 import com.aaa.six.model.User;
