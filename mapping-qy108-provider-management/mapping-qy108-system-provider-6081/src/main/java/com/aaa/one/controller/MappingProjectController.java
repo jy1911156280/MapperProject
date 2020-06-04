@@ -1,4 +1,4 @@
-//package com.aaa.one.controller;
+package com.aaa.one.controller;//package com.aaa.one.controller;
 //
 //import com.aaa.one.base.BaseService;
 //import com.aaa.one.base.CommonController;
@@ -165,7 +165,6 @@
 //    }
 //
 //}
-package one.controller;
 import com.aaa.one.model.MappingProject;
 import com.aaa.one.service.MappingProjectService;
 import com.github.pagehelper.PageInfo;

@@ -205,8 +205,8 @@ import java.util.Map;
      *@Date 2020/6/4 9:42
      *@return java.util.List<com.aaa.one.model.TecUnitEptVo>
      **/
-    @GetMapping("/getAllInfoUnit")
-     List<TecUnitEptVo> getAllInfo();
+//    @GetMapping("/getAllInfoUnit")
+//     List<TecUnitEptVo> getAllInfo();
 
     /**
      *@Author Jiayi
