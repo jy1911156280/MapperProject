@@ -20,7 +20,7 @@ import tk.mybatis.spring.annotation.MapperScan;
         RedisAutoConfiguration.class,
         RedisRepositoriesAutoConfiguration.class
 })
-@MapperScan("com.aaa.six.mapper")
+@MapperScan("com.aaa.one.mapper")
 @EnableDiscoveryClient
 @EnableCircuitBreaker
 public class ApplicationRun8081 {
