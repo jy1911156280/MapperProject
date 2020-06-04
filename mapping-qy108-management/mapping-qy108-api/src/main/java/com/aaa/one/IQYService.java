@@ -1,22 +1,24 @@
 package com.aaa.one;
 
-import com.aaa.one.model.Dept;
-import com.aaa.one.model.Dict;
+import com.aaa.one.base.ResultData;
 import com.aaa.one.model.MappingProject;
+import com.aaa.one.model.MappingUnit;
+import com.aaa.one.model.TecUnitEptVo;
 import com.aaa.one.model.User;
 import com.aaa.one.vo.TokenVo;
 import com.github.pagehelper.PageInfo;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Company AAA软件教育
- * @Title mapping-qy108
- * @Author hhy
- * @Version 0.1.0
- * @Date Create in 2020/5/16 8:44
+ * @Author Seven Lee
+ * @Date Create in 2020/5/15 16:14
  * @Description
  *      fallbackFactory:就是来实现熔断的，在实际开发中，开发阶段不能去开启熔断
  *      因为一旦开启了熔断，整个异常都不会再抛出，不方便调bug
@@ -32,312 +34,197 @@ import java.util.List;
  *         也就是说最终把这些参数值传递到provider项目的controller中，在这provider项目的controller中也必须使用
  *         相同的注解，而且provider和api的方法必须要一模一样(copy是最方便的)
  *
- */
-@FeignClient(value = "system-interface")
-public interface IQYService {
+ **/
+@FeignClient(value = "system-interface" )
+ public interface IQYService {
 
     /**
-     * @return TokenVo
+     * @author Seven Lee
+     * @description
+     *      执行登录操作
+     * @param [user]
+     * @date 2020/5/15
+     * @return com.aaa.lee.base.ResultData
      * @throws
-     * @author hhy
-     * @description 执行登陆操作
-     * @param: [user]
-     * @date 2020/5/16 9:08
-     */
+     **/
     @PostMapping("/doLogin")
     TokenVo doLogin(@RequestBody User user);
-
     /**
-     * @Author: ly
-     * @description:
-     *
-     *      查询所有的部门
-     * @date: 2020/5/22
-     * @param pid
-     * @param pageNo
-     * @param pageSize
-     * @return: com.github.pagehelper.PageInfo
-     *
-     */
-    @PostMapping("/getAllDept")
-    PageInfo getAllDept(@RequestParam("pid") Integer pid, @RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
-
-    /**
-     * @Author: ly
-     * @description:
-     *
-     *      根据主键查找部门
-     * @date: 2020/5/22
-     * @param id
-     * @return: com.aaa.six.model.Dept
-     *
-     */
-    @GetMapping("/getDeptById")
-    Dept getDeptById(@RequestParam("id")Integer id);
-
-    /**
-     * @Author: ly
-     * @description:
-     *
-     *      按照调价查询部门
-     * @date: 2020/5/22
-     * @param dept
-     * @return: java.util.List<com.aaa.six.model.Dept>
-     *
-     */
-    @PostMapping("/getDeptByFileds")
-    List<Dept> getDeptByFileds(@RequestBody Dept dept);
-
-    /**
-     * @Author: ly
-     * @description:
-     *
-     *      更新部门
-     * @date: 2020/5/22
-     * @param dept
-     * @return: java.lang.Integer
-     *
-     */
-    @PostMapping("/updateDept")
-    Integer updateDept(@RequestBody Dept dept);
-
-    /**
-     * @Author: ly
-     * @description:
-     *
-     *      按照主键批量删除
-     * @date: 2020/5/22
-     * @param ids
-     * @return: java.lang.Integer
-     *
-     */
-    @PostMapping("/delByIds")
-    Integer delByIds(@RequestBody List<Object> ids);
-
-    /**
-     * @Author: ly
-     * @description:
-     *
-     *      增加部门
-     * @date: 2020/5/22
-     * @param dept
-     * @return: java.lang.Integer
-     *
-     */
-    @PostMapping("/addDept")
-    Integer addDept(@RequestBody Dept dept);
-
-
-    /**
-     *@Description: TODO
-     * 项目管理 新增方法 单个新增
-     *@Param :  [mappingProject]
-     *@MethodName: add
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:51
-     *@Return: java.lang.Integer
-     */
-    @PostMapping("/addMappingProject")
-    Integer add(@RequestBody MappingProject mappingProject);
-    /**
-     *@Description: TODO
-     * 项目管理 删除方法  单个删除
-     *@Param :  [id]
-     *@MethodName: delMappingProject
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:52
-     *@Return: java.lang.Integer
-     */
-    @GetMapping("/delMappingProject/{id}")
-    Integer delMappingProject(@PathVariable("id") Long id);
-
-    /**
-     *@Description: TODO
-     * 项目管理 删除方法 批量删除
-     *@Param :  [ids]
-     *@MethodName: delBatch
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:52
-     *@Return: java.lang.Integer
-     */
-    @PostMapping("/deleteBatchMappingProject")
-    Integer delBatch(@RequestBody List<Object> ids);
-
-    /**
-     *@Description: TODO
-     * 项目管理 更新方法 单个更新
-     *@Param :  [id]
-     *@MethodName: selectOne
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:52
-     *@Return: com.aaa.six.model.MappingProject
-     */
-    @GetMapping("lectOne")
-    MappingProject selectOne(@RequestParam("id")Long id);
-
-    /**
-     *@Description: TODO
-     * 项目管理 更新方法 单个更新
-     *@Param :  [mappingProject]
-     *@MethodName: update
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:53
-     *@Return: java.lang.Integer
-     */
-    @PostMapping("/updateMappingProject")
-    Integer update(@RequestBody MappingProject mappingProject);
-
-    /**
-     *@Description: TODO
-     * 项目管理 查询方法 分页查询
-     *@Param :  [pageNo, pageSize]
-     *@MethodName: queryListByPage
-     *@Author: lifuju
-     *@Date: 2020/5/24 8:53
-     *@Return: com.github.pagehelper.PageInfo
-     */
-    @PostMapping("/mappingProjectByPage")
-    PageInfo queryListByPage(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
-
-    /**
-     * @author lwq
+     * @author Seven Lee
      * @description
-     *    分页查询用户信息
-     * @param: [pageNo, pageSize]
-     * @date 2020/5/27
-     * @return com.github.pagehelper.PageInfo<com.aaa.six.model.User>
-     * @throws
-     **/
-    @PostMapping("/selectUserInfo")
-    PageInfo<User> selectUserInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
-
-    /**
-     * @author lwq
-     * @description
-     *    根据id查询用户信息
-     * @param: [user]
-     * @date 2020/5/27
-     * @return com.aaa.six.model.User
-     * @throws
-     **/
-    @PostMapping("/selectInfoById")
-    User selectInfoById(@RequestBody User user);
-
-    /**
-     * @author lwq
-     * @description
-     *    根据id删除用户
-     * @param: [user]
-     * @date 2020/5/27
-     * @return java.lang.Boolean
-     * @throws
-     **/
-    @PostMapping("/deleteUserById")
-    Boolean deleteUserById(@RequestBody User user);
-
-    /**
-     * @author lwq
-     * @description
-     *    新增用户信息
-     * @param: [user]
+     *      新增用户信息
+     * @param [user]
      * @date 2020/5/27
      * @return java.lang.Boolean
      * @throws
      **/
     @PostMapping("/addUser")
     Boolean addUser(@RequestBody User user);
+
     /**
-     * @author lwq
+     * @author Seven Lee
      * @description
-     *    修改用户信息
-     * @param: [user]
+     *      添加登录日志信息
+     * @param [map]
      * @date 2020/5/27
+     * @return com.aaa.lee.base.ResultData
+     * @throws
+     **/
+    @PostMapping("/addLoginLog")
+    ResultData addLoginLog(@RequestBody Map map);
+
+    /**
+     * @author Seven Lee
+     * @description
+     *      ftp文件上传
+     *      这个时候如果你自己测试过，你会发现file是无论如何都无法发送到provider项目中
+     *      因为feign默认只能发送普通类型(java8种基本类型，封装类型，集合...)
+     *      最终这些普通类型都可以转换为二进制流的形式在http之间传输，但是文件类型不行，
+     *      因为文件类型只能转换为字节流/字符流
+     *      也就是说，最终我可以让PostMapping去接收Multipart/form-data类型
+     *      让feign使用json的数据格式来进行接收
+     * @param [file]
+     * @date 2020/5/29
      * @return java.lang.Boolean
      * @throws
      **/
-    @PostMapping("/updateUser")
-    Boolean updateUser(@RequestBody User user);
-    /**
-     * @author lwq
-     * @description
-     *    批量删除用户
-     * @param: [ids]
-     * @date 2020/5/27
-     * @return java.lang.Integer
-     * @throws
-     **/
-    @PostMapping("/deleteUserByIds")
-    Integer deleteUserByIds(@RequestBody List<Object> ids);
+    @PostMapping(value = "/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    Boolean uploadFile(@RequestBody MultipartFile file);
+
+
 
     /**
-     * @author lwq
-     * @description
-     *    分页查询字典信息
-     * @param: [pageNo, pageSize]
-     * @date 2020/5/27
-     * @return com.github.pagehelper.PageInfo<com.aaa.six.model.Dict>
-     * @throws
+     *@Author Jiayi
+     *@Description  根据项目类型查询项目
+     *@Param [where]
+     *@Date 2020/6/2 11:35
+     *@return java.util.List<com.aaa.one.model.MappingProject>
      **/
-    @PostMapping("/selectDictInfo")
-    PageInfo<Dict> selectDictInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pageSize") Integer pageSize);
+    @GetMapping("/queryListByType")
+    List<MappingProject> queryListByType(@RequestParam("where") String where);
 
     /**
-     * @author lwq
-     * @description
-     *    新增字典信息
-     * @param: [dict]
-     * @date 2020/5/27
-     * @return java.lang.Boolean
-     * @throws
+     *@Author Jiayi
+     *@Description       根据项目类型查询项目 开启分页
+     *@Param [where, currentPage, pageSize]
+     *@Date 2020/6/3 14:07
+     *@return com.github.pagehelper.PageInfo<com.aaa.one.model.MappingProject>
      **/
-    @PostMapping("/addDict")
-    Boolean addDict(@RequestBody Dict dict);
+    @GetMapping("queryListByTypeAndPage")
+    PageInfo<MappingProject> queryListByTypeAndPage(@RequestParam("where") String where, @RequestParam("currentPage") Integer currentPage, @RequestParam("pageSize") Integer pageSize);
+
+
 
     /**
-     * @author lwq
-     * @description
-     *    根据id查询字典信息
-     * @param: [dict]
-     * @date 2020/5/27
-     * @return com.aaa.six.model.Dict
-     * @throws
+     *@Author Jiayi
+     *@Description   添加项目
+     *@Param [mappingProject]
+     *@Date 2020/6/3 13:54
+     *@return boolean
      **/
-    @PostMapping("/selectDictById")
-    Dict selectDictById(@RequestBody Dict dict);
+    @PostMapping("/addMappingProject")
+    boolean addMappingProject(@RequestBody MappingProject mappingProject);
 
     /**
-     * @author lwq
-     * @description
-     *    修改字典信息
-     * @param: [dict]
-     * @date 2020/5/27
-     * @return java.lang.Boolean
-     * @throws
+     *@Author Jiayi
+     *@Description   查询所有项目
+     *@Param []
+     *@Date 2020/6/3 14:01
+     *@return java.util.List<com.aaa.one.model.MappingProject>
      **/
-    @PostMapping("/updateDict")
-    Boolean updateDict(@RequestBody Dict dict);
+    @GetMapping("/queryListAllProject")
+    List<MappingProject> queryListAllProject();
 
     /**
-     * @author lwq
-     * @description
-     *    根据id删除字典信息
-     * @param: [dict]
-     * @date 2020/5/27
-     * @return java.lang.Boolean
-     * @throws
+     *@Author Jiayi
+     *@Description       查询所有项目 开启分页
+     *@Param [currentPage, pageSize]
+     *@Date 2020/6/3 14:04
+     *@return com.github.pagehelper.PageInfo<com.aaa.one.model.MappingProject>
      **/
-    @PostMapping("/deleteDictById")
-    Boolean deleteDictById(@RequestBody Dict dict);
+    @GetMapping("/queryListAllByPage")
+    PageInfo<MappingProject> queryListAllByPage(@RequestParam("currentPage")  Integer currentPage, @RequestParam("pageSize") Integer pageSize);
 
     /**
-     * @author lwq
-     * @description
-     *    批量删除字典信息
-     * @param: [ids]
-     * @date 2020/5/27
-     * @return java.lang.Integer
-     * @throws
+     *@Author Jiayi
+     *@Description   修改项目信息
+     *@Param [mappingProject]
+     *@Date 2020/6/3 14:08
+     *@return java.lang.Boolean
      **/
-    @PostMapping("/deleteDictByIds")
-    Integer deleteDictByIds(@RequestBody List<Object> ids);
+    @PutMapping("/updateProject")
+    Boolean updateProject(@RequestBody MappingProject mappingProject);
+
+    /**
+     *@Author Jiayi
+     *@Description   删除项目
+     *@Param [mappingProject]
+     *@Date 2020/6/3 14:09
+     *@return java.lang.Boolean
+     **/
+    @DeleteMapping("/deleteProject")
+    Boolean deleteProject(@RequestBody MappingProject mappingProject);
+    /**
+     *@Author Jiayi
+     *@Description   项目统计信息
+     *@Param []
+     *@Date 2020/6/3 14:09
+     *@return java.util.List<java.util.Map<java.lang.String,java.lang.Object>>
+     **/
+    @GetMapping("/projectTypeStatistics")
+    List<Map<String,Object>> projectTypeStatistics();
+
+
+
+    /**
+     *@Author Jiayi
+     *@Description   查询所有单位信息
+     *@Param []
+     *@Date 2020/6/4 9:39
+     *@return java.util.List<com.aaa.one.model.MappingUnit>
+     **/
+    @GetMapping("/queryListAllUnit")
+    List<MappingUnit> queryListAllUnit();
+
+    /**
+     *@Author Jiayi
+     *@Description   查询所有单位信息    开启分页
+     *@Param [currentPage, pageSize]
+     *@Date 2020/6/4 9:41
+     *@return com.github.pagehelper.PageInfo<com.aaa.one.model.MappingUnit>
+     **/
+    @GetMapping("/queryListAllUnitByPage")
+    PageInfo<MappingUnit> queryListAllUnitByPage(@RequestParam("currentPage") Integer currentPage, @RequestParam("pageSize") Integer pageSize);
+
+    /**
+     *@Author Jiayi
+     *@Description   人员设备统计查询
+     *@Param []
+     *@Date 2020/6/4 9:42
+     *@return java.util.List<com.aaa.one.model.TecUnitEptVo>
+     **/
+    @GetMapping("/getAllInfoUnit")
+     List<TecUnitEptVo> getAllInfo();
+
+    /**
+     *@Author Jiayi
+     *@Description   单位资质统计
+     *@Param []
+     *@Date 2020/6/4 9:42
+     *@return java.util.Map<java.lang.String,java.lang.Object>
+     **/
+    @GetMapping("/getUnitLevel")
+     Map<String,Object> getUnitLevel();
+
+
+
+
+
+
+
+
+
+
 }

@@ -207,7 +207,7 @@ public class MappingProjectController {
      *@Date 2020/6/3 14:07
      *@return com.github.pagehelper.PageInfo<com.aaa.one.model.MappingProject>
      **/
-    public PageInfo<MappingProject> queryListByTypeAndPage(@RequestParam String where, @RequestParam Integer currentPage, @RequestParam Integer pageSize){
+    PageInfo<MappingProject> queryListByTypeAndPage(@RequestParam("where") String where, @RequestParam("currentPage") Integer currentPage, @RequestParam("pageSize") Integer pageSize) {
         return mappingProjectService.queryListByTypeAndPage( where,  currentPage,  pageSize);
     }
 
@@ -244,7 +244,7 @@ public class MappingProjectController {
      *@return com.github.pagehelper.PageInfo<com.aaa.one.model.MappingProject>
      **/
     @GetMapping("/queryListAllByPage")
-    public PageInfo<MappingProject> queryListAllByPage(@RequestParam  Integer currentPage, @RequestParam Integer pageSize){
+    public PageInfo<MappingProject> queryListAllByPage(@RequestParam("currentPage")  Integer currentPage, @RequestParam("pageSize") Integer pageSize){
         PageInfo<MappingProject> info = mappingProjectService.queryListAllByPage(currentPage, pageSize);
         return info;
     }

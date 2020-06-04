@@ -30,7 +30,7 @@ public class MappingUnitController {
         *@return java.util.List<com.aaa.one.model.MappingUnit>
     **/
     @GetMapping("/queryListAllUnit")
-    public List<MappingUnit> queryListAll(){
+    public List<MappingUnit> queryListAllUnit(){
         return mappingUnitService.queryListAll();
     }
 
@@ -42,7 +42,7 @@ public class MappingUnitController {
         *@return com.github.pagehelper.PageInfo<com.aaa.one.model.MappingUnit>
     **/
     @GetMapping("/queryListAllUnitByPage")
-    public PageInfo<MappingUnit> queryListAllUnitByPage(@RequestParam Integer currentPage, @RequestParam Integer pageSize){
+    public PageInfo<MappingUnit> queryListAllUnitByPage(@RequestParam("currentPage") Integer currentPage, @RequestParam("pageSize") Integer pageSize){
         return mappingUnitService.queryListAllByPage(currentPage,pageSize);
     }
 

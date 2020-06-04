@@ -196,6 +196,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import tk.mybatis.mapper.util.Sqls;
 
 import java.util.List;
@@ -293,6 +294,7 @@ public class MappingProjectService extends BaseService<MappingProject> {
      *@Date 2020/6/2 18:41
      *@return com.github.pagehelper.PageInfo<com.aaa.one.model.MappingProject>
      **/
+    @GetMapping("/queryListByTypeAndPage")
     public PageInfo<MappingProject> queryListByTypeAndPage(String where, Integer currentPage, Integer pageSize){
         Sqls custom = Sqls.custom();
         custom.andEqualTo("projectType",where);
