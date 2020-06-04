@@ -65,7 +65,7 @@
 	COUNT(
 
 		IF (
-			qualification_level = "甲级",
+			qualification_level = '甲级',
 			1,
 			NULL
 		)
@@ -73,7 +73,7 @@
 	COUNT(
 
 		IF (
-			qualification_level = "乙级",
+			qualification_level = '乙级',
 			1,
 			NULL
 		)
@@ -81,7 +81,7 @@
 	COUNT(
 
 		IF (
-			qualification_level = "丙级",
+			qualification_level = '丙级',
 			1,
 			NULL
 		)
@@ -89,7 +89,7 @@
 	COUNT(
 
 		IF (
-			qualification_level = "丁级",
+			qualification_level = '丁级',
 			1,
 			NULL
 		)
