@@ -46,17 +46,17 @@ public class MappingUnitController {
         return mappingUnitService.queryListAllByPage(currentPage,pageSize);
     }
 
-    /**
-        *@Author Jiayi
-        *@Description   人员设备统计查询
-        *@Param []
-        *@Date 2020/6/4 9:42
-        *@return java.util.List<com.aaa.one.model.TecUnitEptVo>
-    **/
-    @GetMapping("/getAllInfoUnit")
-    public List<TecUnitEptVo> getAllInfo(){
-        return mappingUnitService.getAllInfo();
-    }
+//    /**
+//        *@Author Jiayi
+//        *@Description   人员设备统计查询
+//        *@Param []
+//        *@Date 2020/6/4 9:42
+//        *@return java.util.List<com.aaa.one.model.TecUnitEptVo>
+//    **/
+//    @GetMapping("/getAllInfoUnit")
+//    public List<TecUnitEptVo> getAllInfo(){
+//        return mappingUnitService.getAllInfo();
+//    }
 
     /**
         *@Author Jiayi

@@ -69,12 +69,12 @@ public abstract class CommonController <T> extends BaseController{
             if(insertResult>0){
                //说明保存成功
                 afterAdd(map);
-                return insertSuccess();
+                return ADDSuccess();
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return insertFailed();
+        return ADDFailed();
     }
     // TODO delete, batchDelete, update, getOne, getList, getListByPage(不带条件的分页查询)
 

@@ -20,12 +20,12 @@ import java.util.Map;
  * @Version 1.0
  **/
 @Service
-public class MappingUnitService extends BaseService {
+public class MappingUnitService extends BaseService<MappingUnit> {
     @Autowired
     MappingUnitMapper mappingUnitMapper;
 
-    @Autowired
-    TecUnitEptVoMapper tecUnitEptVoMapper;
+//    @Autowired
+//    TecUnitEptVoMapper tecUnitEptVoMapper;
 
 
     /**
@@ -57,20 +57,20 @@ public class MappingUnitService extends BaseService {
     }
 
 
-    /**
-        *@Author Jiayi
-        *@Description   人员设备汇总统计查询
-        *@Param []
-        *@Date 2020/6/3 10:15
-        *@return java.util.List<com.aaa.one.model.TecUnitEptVo>
-    **/
-    public List<TecUnitEptVo> getAllInfo(){
-        List<TecUnitEptVo> all = tecUnitEptVoMapper.getAll();
-        if (null != all && all.size()>0){
-            return all;
-        }
-        return null;
-    }
+//    /**
+//        *@Author Jiayi
+//        *@Description   人员设备汇总统计查询
+//        *@Param []
+//        *@Date 2020/6/3 10:15
+//        *@return java.util.List<com.aaa.one.model.TecUnitEptVo>
+//    **/
+//    public List<TecUnitEptVo> getAllInfo(){
+//        List<TecUnitEptVo> all = tecUnitEptVoMapper.getAll();
+//        if (null != all && all.size()>0){
+//            return all;
+//        }
+//        return null;
+//    }
 
     /**
         *@Author Jiayi
