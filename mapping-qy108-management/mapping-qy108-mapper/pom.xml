@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>mapping-qy108-management</artifactId>
-        <groupId>com.aaa.six</groupId>
+        <groupId>com.aaa.one</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.aaa.six</groupId>
+            <groupId>com.aaa.one</groupId>
             <artifactId>mapping-qy108-model</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
