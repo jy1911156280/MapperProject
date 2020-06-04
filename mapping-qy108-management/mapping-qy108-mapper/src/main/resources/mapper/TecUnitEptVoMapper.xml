@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaa.one.mapper.TecUnitEptVoMapper" >
+
+
+    <select id="getAll" resultType="com.aaa.one.model.TecUnitEptVo">
+        SELECT
+	mu.qualification_level level,
+	count(*) unitNum,
+	t.type1 junTec,
+	t.type2 midTec,
+	t.type3 senTec,
+	count(
+
+		IF (NAME = "测距仪", 1, NULL)
+	) rangeFin,
+	count(
+
+		IF (NAME = "水准仪", 1, NULL)
+	) surLev,
+	count(
+
+		IF (NAME = "接收机", 1, NULL)
+	) receiver,
+	count(
+
+		IF (NAME = "全站仪", 1, NULL)
+	) totalSta
+FROM
+	t_mapping_unit mu
+LEFT JOIN (
+	SELECT
+		b.qualification_level,
+		count(
+
+			IF (
+				major_type = "初级技术人员",
+				1,
+				NULL
+			)
+		) "type1",
+		count(
+
+			IF (
+				major_type = "中级技术人员",
+				1,
+				NULL
+			)
+		) "type2",
+		count(
+
+			IF (
+				major_type = "高级技术人员",
+				1,
+				NULL
+			)
+		) "type3",
+		b.qualification_level bb
+	FROM
+		t_technicist a,
+		t_mapping_unit b
+	WHERE
+		a.user_id = b.user_id
+	GROUP BY
+		qualification_level
+) t ON mu.qualification_level = t.qualification_level
+LEFT JOIN t_equipment em ON em.user_id = mu.user_id
+GROUP BY
+	mu.qualification_level
+    </select>
+</mapper>
