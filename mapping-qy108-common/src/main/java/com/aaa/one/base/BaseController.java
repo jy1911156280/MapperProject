@@ -88,10 +88,10 @@ public class BaseController {
      * @return com.aaa.six.base.ResultData
      * @throws
      */
-    protected ResultData insertSuccess(){
+    protected ResultData ADDSuccess(){
         ResultData resultData = new ResultData();
-        resultData.setCode(INSERT_SUCCESS.getCode());
-        resultData.setMsg(INSERT_SUCCESS.getMsg());
+        resultData.setCode(ADD_SUCCESS.getCode());
+        resultData.setMsg(ADD_SUCCESS.getMsg());
         return resultData;
     }
 
@@ -104,9 +104,9 @@ public class BaseController {
      * @return com.aaa.six.base.ResultData
      * @throws
      */
-    protected ResultData insertSuccess(String msg){
+    protected ResultData ADDSuccess(String msg){
         ResultData resultData = new ResultData();
-        resultData.setCode(INSERT_SUCCESS.getCode());
+        resultData.setCode(ADD_SUCCESS.getCode());
         resultData.setMsg(msg);
         return resultData;
     }
@@ -120,10 +120,10 @@ public class BaseController {
      * @return com.aaa.six.base.ResultData
      * @throws
      */
-    protected ResultData insertFailed(){
+    protected ResultData ADDFailed(){
         ResultData resultData = new ResultData();
-        resultData.setCode(INSERT_FAILED.getCode());
-        resultData.setMsg(INSERT_FAILED.getMsg());
+        resultData.setCode(ADD_FAILED.getCode());
+        resultData.setMsg(ADD_FAILED.getMsg());
         return resultData;
     }
 
@@ -136,9 +136,9 @@ public class BaseController {
      * @return com.aaa.six.base.ResultData
      * @throws
      */
-    protected ResultData insertFailed(String msg){
+    protected ResultData ADDFailed(String msg){
         ResultData resultData = new ResultData();
-        resultData.setCode(INSERT_FAILED.getCode());
+        resultData.setCode(ADD_FAILED.getCode());
         resultData.setMsg(msg);
         return resultData;
     }
